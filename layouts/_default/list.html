@@ -12,9 +12,10 @@
 </div>
 {{ end }}
 
-{{ if .Pages }}
+{{ $posts := where .Site.RegularPages "Section" "blog" }}
+{{ if $posts }}
 <section class="posts">
-    {{ range .Pages }}
+    {{ range $posts }}
     <article class="post-preview">
         <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
         {{ if .Date }}
@@ -29,6 +30,8 @@
     </article>
     {{ end }}
 </section>
+{{ else }}
+<p>No posts found. Check back soon!</p>
 {{ end }}
 {{ end }}
 
