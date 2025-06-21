@@ -1,7 +1,6 @@
-baseURL = "https://yourusername.github.io/ReturnToHer/"
+baseURL = "https://sfraney.github.io/ReturnToHer/"
 languageCode = "en-us"
 title = "Return To Her"
-theme = ""
 
 [params]
   description = "A personal blog about returning to what matters most"
