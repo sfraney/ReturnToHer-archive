@@ -229,9 +229,9 @@
     <nav>
         <div class="container">
             <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/about/">About</a></li>
-                <li><a href="/blog/">Blog</a></li>
+                <li><a href="{{ .Site.BaseURL }}">Home</a></li>
+                <li><a href="{{ "about/" | relURL }}">About</a></li>
+                <li><a href="{{ "blog/" | relURL }}">Blog</a></li>
             </ul>
         </div>
     </nav>
