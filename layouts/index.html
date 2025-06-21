@@ -1,0 +1,140 @@
+{{ define "main" }}
+<section class="hero">
+    <h1>Welcome to {{ .Site.Title }}</h1>
+    <p class="hero-subtitle">{{ .Site.Params.description }}</p>
+</section>
+
+<section class="recent-posts">
+    <h2>Recent Posts</h2>
+    {{ $posts := where .Site.RegularPages "Type" "blog" }}
+    {{ $recentPosts := first 5 $posts }}
+    
+    {{ if $recentPosts }}
+    <div class="posts-grid">
+        {{ range $recentPosts }}
+        <article class="post-card">
+            <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+            {{ if .Date }}
+            <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
+                {{ .Date.Format "January 2, 2006" }}
+            </time>
+            {{ end }}
+            {{ if .Summary }}
+            <p>{{ .Summary }}</p>
+            {{ end }}
+            <a href="{{ .RelPermalink }}" class="read-more">Read more →</a>
+        </article>
+        {{ end }}
+    </div>
+    <div class="view-all">
+        <a href="/blog/" class="btn">View All Posts</a>
+    </div>
+    {{ else }}
+    <p>No posts yet. Check back soon!</p>
+    {{ end }}
+</section>
+{{ end }}
+
+<style>
+.hero {
+    text-align: center;
+    padding: 3rem 0;
+    margin-bottom: 3rem;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.recent-posts {
+    margin-top: 3rem;
+}
+
+.recent-posts h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+}
+
+.posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.post-card {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border-left: 4px solid #667eea;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.post-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.post-card h3 {
+    margin-bottom: 0.5rem;
+}
+
+.post-card h3 a {
+    color: #2c3e50;
+    text-decoration: none;
+}
+
+.post-card h3 a:hover {
+    color: #667eea;
+}
+
+.post-card time {
+    color: #666;
+    font-size: 0.9rem;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.view-all {
+    text-align: center;
+}
+
+.btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: transform 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    text-decoration: none;
+}
+
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2rem;
+    }
+    
+    .posts-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style> 
