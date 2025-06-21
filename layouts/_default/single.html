@@ -1,24 +1,27 @@
 {{ define "main" }}
-<article>
-    <header>
-        <h1>{{ .Title }}</h1>
+<article class="max-w-4xl mx-auto">
+    <header class="mb-8 md:mb-12">
+        <h1 class="heading-1 mb-4">{{ .Title }}</h1>
         {{ if .Date }}
-        <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
+        <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}" class="body-large text-muted block">
             {{ .Date.Format "January 2, 2006" }}
         </time>
         {{ end }}
     </header>
     
-    <div class="content">
+    <div class="prose-enhanced mb-8 md:mb-12">
         {{ .Content }}
     </div>
     
     {{ if .Params.tags }}
-    <footer>
-        <div class="tags">
-            <strong>Tags:</strong>
+    <footer class="border-t border-gray-200 pt-8">
+        <div class="flex flex-wrap items-center gap-2">
+            <span class="body-small font-medium text-emphasis">Tags:</span>
             {{ range .Params.tags }}
-            <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}">{{ . }}</a>
+            <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" 
+               class="inline-block bg-gray-100 hover:bg-primary-100 text-gray-700 hover:text-primary-700 px-3 py-1 rounded-full body-xs font-medium transition-colors duration-200">
+                {{ . }}
+            </a>
             {{ end }}
         </div>
     </footer>
