@@ -98,7 +98,65 @@ Phase 2 builds upon the solid foundation established in Phase 1 to create beauti
 </section>
 ```
 
-### 2.1.3 Enhanced Recent Posts Section
+### 2.1.3 Header Simplification and Hero Section Integration
+
+**Objective:**
+Eliminate visual and content redundancy between the global header/navigation and the new homepage hero section, ensuring a clear visual hierarchy and a professional, focused user experience.
+
+**Background:**
+With the introduction of a visually impactful hero section on the homepage, the global header/navigation (which currently includes the site title, description, and a gradient background) now competes visually and contextually with the hero. This redundancy can confuse users and dilute the intended impact of the hero section.
+
+---
+
+**Detailed Implementation Plan:**
+
+#### 1. Refactor the Header Markup
+- **Remove the site description** from the header. Only the site title (as a logo/brand) and navigation links should remain.
+- **Remove the gradient background** from the header. The header should use a transparent background on the homepage and a solid background (e.g., `bg-white`) on all other pages.
+- **Ensure the navigation bar remains sticky and accessible** at the top of the page.
+
+**Example:**
+```html
+<header class="{{ if .IsHome }}bg-transparent{{ else }}bg-white shadow-sm border-b border-gray-200{{ end }} text-gray-900">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <a href="{{ .Site.BaseURL }}" class="heading-5 text-gray-900 hover:text-primary-600 transition-colors duration-200" aria-label="Home">
+      {{ .Site.Title }}
+    </a>
+    <!-- Navigation links here -->
+  </div>
+</header>
+```
+
+#### 2. Adjust Navigation Links
+- Keep navigation links as they are, but ensure their color and background are appropriate for both transparent and solid header backgrounds.
+- Use Tailwind utility classes to provide hover and focus states for accessibility.
+
+#### 3. Integrate with the Hero Section
+- The hero section should be the only place on the homepage with a large site title, description, and primary calls to action.
+- The header should visually recede (be transparent) on the homepage, allowing the hero section to be the main visual focus.
+- On all other pages, the header should have a solid background for clarity and separation from content.
+
+#### 4. Responsive and Accessibility Considerations
+- Ensure the header remains fully responsive and accessible:
+  - Keyboard navigation for all links and menu items.
+  - Sufficient color contrast for text and interactive elements.
+  - Clear focus states for accessibility.
+- Test the header and hero integration on all device sizes and browsers.
+
+#### 5. Remove Redundant Styles
+- Remove any CSS or Tailwind classes related to the gradient background or site description in the header.
+- Ensure there are no duplicate site titles or descriptions above the hero section on the homepage.
+
+---
+
+**Success Criteria:**
+- The homepage has a single, clear visual introduction (the hero section).
+- The header/navigation is visually distinct and non-redundant.
+- Navigation remains accessible and easy to use on all devices.
+- The header is transparent on the homepage and solid on all other pages.
+- No duplicate site title or description appears above the hero section.
+
+### 2.1.4 Enhanced Recent Posts Section
 **Current Recent Posts Implementation:**
 ```html
 <!-- Existing Card Layout -->
@@ -171,7 +229,7 @@ Phase 2 builds upon the solid foundation established in Phase 1 to create beauti
 </div>
 ```
 
-### 2.1.4 Technical Implementation Strategy
+### 2.1.5 Technical Implementation Strategy
 
 **Leveraging Existing Infrastructure:**
 - **Color System**: Use existing primary-600, secondary-600 gradients
@@ -192,7 +250,7 @@ Phase 2 builds upon the solid foundation established in Phase 1 to create beauti
 - **Screen Reader Support**: Proper semantic HTML structure
 - **Keyboard Navigation**: Ensure all interactive elements are keyboard accessible
 
-### 2.1.5 Implementation Steps
+### 2.1.6 Implementation Steps
 
 **Step 1: Hero Section Development (Days 1-2)**
 1. Replace current welcome section with full-width hero
@@ -215,7 +273,7 @@ Phase 2 builds upon the solid foundation established in Phase 1 to create beauti
 4. Optimize performance and loading times
 5. Ensure accessibility compliance
 
-### 2.1.6 Success Metrics
+### 2.1.7 Success Metrics
 
 **Visual Impact:**
 - [ ] Hero section captures attention within 3 seconds
@@ -235,7 +293,7 @@ Phase 2 builds upon the solid foundation established in Phase 1 to create beauti
 - [ ] Accessibility scores remain high (>95)
 - [ ] Performance scores remain excellent (>90)
 
-### 2.1.7 Integration with Existing System
+### 2.1.8 Integration with Existing System
 
 **Color System Integration:**
 ```css

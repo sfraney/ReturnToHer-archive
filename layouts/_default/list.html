@@ -1,45 +1,49 @@
 {{ define "main" }}
-<header class="mb-8 md:mb-12">
-    <h1 class="heading-1 mb-4">{{ .Title }}</h1>
-    {{ if .Description }}
-    <p class="body-large text-muted">{{ .Description }}</p>
-    {{ end }}
-</header>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="max-w-4xl mx-auto">
+        <header class="mb-8 md:mb-12">
+            <h1 class="heading-1 mb-4">{{ .Title }}</h1>
+            {{ if .Description }}
+            <p class="body-large text-muted">{{ .Description }}</p>
+            {{ end }}
+        </header>
 
-{{ if .Content }}
-<div class="prose-enhanced mb-8 md:mb-12">
-    {{ .Content }}
-</div>
-{{ end }}
+        {{ if .Content }}
+        <div class="prose-enhanced mb-8 md:mb-12">
+            {{ .Content }}
+        </div>
+        {{ end }}
 
-{{ $posts := where .Site.RegularPages "Section" "blog" }}
-{{ if $posts }}
-<section class="space-y-8 md:space-y-12">
-    {{ range $posts }}
-    <article class="border-b border-gray-200 pb-8 md:pb-12 last:border-b-0">
-        <h2 class="heading-3 mb-3">
-            <a href="{{ .RelPermalink }}" class="hover:text-primary-600 transition-colors duration-200">{{ .Title }}</a>
-        </h2>
-        {{ if .Date }}
-        <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}" class="body-xs text-muted block mb-4">
-            {{ .Date.Format "January 2, 2006" }}
-        </time>
+        {{ $posts := where .Site.RegularPages "Section" "blog" }}
+        {{ if $posts }}
+        <section class="space-y-8 md:space-y-12">
+            {{ range $posts }}
+            <article class="border-b border-gray-200 pb-8 md:pb-12 last:border-b-0">
+                <h2 class="heading-3 mb-3">
+                    <a href="{{ .RelPermalink }}" class="hover:text-primary-600 transition-colors duration-200">{{ .Title }}</a>
+                </h2>
+                {{ if .Date }}
+                <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}" class="body-xs text-muted block mb-4">
+                    {{ .Date.Format "January 2, 2006" }}
+                </time>
+                {{ end }}
+                {{ if .Summary }}
+                <p class="body-regular mb-4">{{ .Summary }}</p>
+                {{ end }}
+                <a href="{{ .RelPermalink }}" class="inline-flex items-center text-accent hover:text-primary-700 font-medium transition-colors duration-200">
+                    Read more →
+                    <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </a>
+            </article>
+            {{ end }}
+        </section>
+        {{ else }}
+        <div class="text-center py-12">
+            <p class="body-large text-muted">No posts found. Check back soon!</p>
+        </div>
         {{ end }}
-        {{ if .Summary }}
-        <p class="body-regular mb-4">{{ .Summary }}</p>
-        {{ end }}
-        <a href="{{ .RelPermalink }}" class="inline-flex items-center text-accent hover:text-primary-700 font-medium transition-colors duration-200">
-            Read more →
-            <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-            </svg>
-        </a>
-    </article>
-    {{ end }}
-</section>
-{{ else }}
-<div class="text-center py-12">
-    <p class="body-large text-muted">No posts found. Check back soon!</p>
+    </div>
 </div>
-{{ end }}
 {{ end }} 

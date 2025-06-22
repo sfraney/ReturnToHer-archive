@@ -20,39 +20,43 @@
     </div>
 </section>
 
-<section class="mt-12 md:mt-16">
-    <h2 class="heading-2 text-center mb-8 md:mb-12">Recent Posts</h2>
-    {{ $posts := where .Site.RegularPages "Type" "blog" }}
-    {{ $recentPosts := first 5 $posts }}
-    
-    {{ if $recentPosts }}
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-8 md:mb-12">
-        {{ range $recentPosts }}
-        <article class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border-l-4 border-primary-500 p-6">
-            <h3 class="heading-4 mb-3">
-                <a href="{{ .RelPermalink }}" class="hover:text-primary-600 transition-colors duration-200">{{ .Title }}</a>
-            </h3>
-            {{ if .Date }}
-            <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}" class="body-xs text-muted block mb-3">
-                {{ .Date.Format "January 2, 2006" }}
-            </time>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="max-w-4xl mx-auto">
+        <section class="mt-12 md:mt-16">
+            <h2 class="heading-2 text-center mb-8 md:mb-12">Recent Posts</h2>
+            {{ $posts := where .Site.RegularPages "Type" "blog" }}
+            {{ $recentPosts := first 5 $posts }}
+            
+            {{ if $recentPosts }}
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-8 md:mb-12">
+                {{ range $recentPosts }}
+                <article class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border-l-4 border-primary-500 p-6">
+                    <h3 class="heading-4 mb-3">
+                        <a href="{{ .RelPermalink }}" class="hover:text-primary-600 transition-colors duration-200">{{ .Title }}</a>
+                    </h3>
+                    {{ if .Date }}
+                    <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}" class="body-xs text-muted block mb-3">
+                        {{ .Date.Format "January 2, 2006" }}
+                    </time>
+                    {{ end }}
+                    {{ if .Summary }}
+                    <p class="body-regular mb-4">{{ .Summary }}</p>
+                    {{ end }}
+                    <a href="{{ .RelPermalink }}" class="text-accent hover:text-primary-700 font-medium transition-colors duration-200">
+                        Read more →
+                    </a>
+                </article>
+                {{ end }}
+            </div>
+            <div class="text-center">
+                <a href="{{ "blog/" | relURL }}" class="inline-block bg-gradient-to-r from-primary-600 to-secondary-600 text-white px-6 py-3 rounded-full font-medium hover:shadow-lg transform hover:-translate-y-1 transition-all duration-200">
+                    View All Posts
+                </a>
+            </div>
+            {{ else }}
+            <p class="text-center text-muted body-large">No posts yet. Check back soon!</p>
             {{ end }}
-            {{ if .Summary }}
-            <p class="body-regular mb-4">{{ .Summary }}</p>
-            {{ end }}
-            <a href="{{ .RelPermalink }}" class="text-accent hover:text-primary-700 font-medium transition-colors duration-200">
-                Read more →
-            </a>
-        </article>
-        {{ end }}
+        </section>
     </div>
-    <div class="text-center">
-        <a href="{{ "blog/" | relURL }}" class="inline-block bg-gradient-to-r from-primary-600 to-secondary-600 text-white px-6 py-3 rounded-full font-medium hover:shadow-lg transform hover:-translate-y-1 transition-all duration-200">
-            View All Posts
-        </a>
-    </div>
-    {{ else }}
-    <p class="text-center text-muted body-large">No posts yet. Check back soon!</p>
-    {{ end }}
-</section>
+</div>
 {{ end }} 
