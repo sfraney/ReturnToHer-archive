@@ -427,7 +427,7 @@
                 <div class="ml-10 flex items-baseline space-x-4">
                     {{ range .Site.Menus.main }}
                     <a href="{{ .URL }}" 
-                       class="px-3 py-2 rounded-md body-small font-medium transition-all duration-200 {{ if or ($.IsMenuCurrent "main" .) ($.HasMenuCurrent "main" .) }}{{ if .IsHome }}text-primary-200 bg-white bg-opacity-20{{ else }}text-primary-600 bg-primary-50{{ end }}{{ else }}{{ if .IsHome }}text-white hover:text-primary-200 hover:bg-white hover:bg-opacity-20{{ else }}text-gray-700 hover:text-primary-600 hover:bg-gray-50{{ end }}{{ end }}"
+                       class="px-3 py-2 rounded-md body-small font-medium transition-all duration-200 {{ if or ($.IsMenuCurrent "main" .) ($.HasMenuCurrent "main" .) }}{{ if $.IsHome }}text-primary-200 bg-white bg-opacity-20{{ else }}text-primary-600 bg-primary-50{{ end }}{{ else }}{{ if $.IsHome }}text-white hover:text-primary-200 hover:bg-white hover:bg-opacity-20{{ else }}text-gray-700 hover:text-primary-600 hover:bg-gray-50{{ end }}{{ end }}"
                        {{ if or ($.IsMenuCurrent "main" .) ($.HasMenuCurrent "main" .) }}aria-current="page"{{ end }}>
                         {{ .Name }}
                     </a>
@@ -458,7 +458,7 @@
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 {{ range .Site.Menus.main }}
                 <a href="{{ .URL }}" 
-                   class="block px-3 py-2 rounded-md body-regular font-medium transition-colors duration-200 {{ if or ($.IsMenuCurrent "main" .) ($.HasMenuCurrent "main" .) }}{{ if .IsHome }}text-primary-700 bg-primary-50{{ else }}text-primary-600 bg-primary-50{{ end }}{{ else }}{{ if .IsHome }}text-gray-700 hover:text-primary-600 hover:bg-gray-50{{ else }}text-gray-700 hover:text-primary-600 hover:bg-gray-50{{ end }}{{ end }}"
+                   class="block px-3 py-2 rounded-md body-regular font-medium transition-colors duration-200 {{ if or ($.IsMenuCurrent "main" .) ($.HasMenuCurrent "main" .) }}{{ if $.IsHome }}text-primary-700 bg-primary-50{{ else }}text-primary-600 bg-primary-50{{ end }}{{ else }}{{ if $.IsHome }}text-gray-700 hover:text-primary-600 hover:bg-gray-50{{ else }}text-gray-700 hover:text-primary-600 hover:bg-gray-50{{ end }}{{ end }}"
                    role="menuitem"
                    {{ if or ($.IsMenuCurrent "main" .) ($.HasMenuCurrent "main" .) }}aria-current="page"{{ end }}>
                     {{ .Name }}
