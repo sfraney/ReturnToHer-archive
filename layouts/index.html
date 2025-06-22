@@ -30,21 +30,33 @@
             {{ if $recentPosts }}
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-8 md:mb-12">
                 {{ range $recentPosts }}
-                <article class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border-l-4 border-primary-500 p-6">
-                    <h3 class="heading-4 mb-3">
-                        <a href="{{ .RelPermalink }}" class="hover:text-primary-600 transition-colors duration-200">{{ .Title }}</a>
-                    </h3>
-                    {{ if .Date }}
-                    <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}" class="body-xs text-muted block mb-3">
-                        {{ .Date.Format "January 2, 2006" }}
-                    </time>
-                    {{ end }}
-                    {{ if .Summary }}
-                    <p class="body-regular mb-4">{{ .Summary }}</p>
-                    {{ end }}
-                    <a href="{{ .RelPermalink }}" class="text-accent hover:text-primary-700 font-medium transition-colors duration-200">
-                        Read more →
-                    </a>
+                <article class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden">
+                    <!-- Featured Image Placeholder -->
+                    <div class="h-48 md:h-56 bg-gradient-to-br from-primary-100 to-secondary-100 flex items-center justify-center">
+                        <div class="text-primary-600 text-4xl">📝</div>
+                    </div>
+                    
+                    <!-- Post Content -->
+                    <div class="p-6">
+                        <!-- Enhanced Metadata -->
+                        <div class="flex items-center text-sm text-gray-500 mb-3">
+                            <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+                            <span class="mx-2">•</span>
+                            <span>{{ .ReadingTime }} min read</span>
+                        </div>
+                        
+                        <h3 class="heading-4 mb-3">
+                            <a href="{{ .RelPermalink }}" class="hover:text-primary-600 transition-colors duration-200">{{ .Title }}</a>
+                        </h3>
+                        
+                        {{ if .Summary }}
+                        <p class="body-regular mb-4">{{ .Summary }}</p>
+                        {{ end }}
+                        
+                        <a href="{{ .RelPermalink }}" class="text-accent hover:text-primary-700 font-medium transition-colors duration-200">
+                            Read more →
+                        </a>
+                    </div>
                 </article>
                 {{ end }}
             </div>
