@@ -9,6 +9,9 @@
                     {{ .Date.Format "January 2, 2006" }}
                 </time>
                 {{ end }}
+                {{ if .Params.image }}
+                <img src="{{ .Params.image }}" alt="{{ .Title }}" class="mt-4 rounded-lg">
+                {{ end }}
             </header>
             
             <div class="prose-enhanced mb-8 md:mb-12">
