@@ -34,9 +34,13 @@
                          role="article" 
                          aria-labelledby="post-title-{{ $post.File.UniqueID }}">
                     <!-- Featured Image Placeholder -->
+                    {{ if $post.Params.image }}
+                    <img src="{{ $post.Params.image | relURL }}" alt="Featured image for {{ $post.Title }}" class="w-full h-48 object-cover">
+                    {{ else }}
                     <div class="featured-image-placeholder">
                         <div class="text-primary-600 text-4xl" aria-hidden="true">📝</div>
                     </div>
+                    {{ end }}
                     
                     <!-- Post Content -->
                     <div class="p-6">
