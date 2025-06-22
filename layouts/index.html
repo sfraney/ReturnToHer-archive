@@ -13,8 +13,8 @@
             <h1 class="text-4xl md:text-6xl font-bold mb-6">{{ .Site.Title }}</h1>
             <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto opacity-90">{{ .Site.Params.description }}</p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="{{ "blog/" | relURL }}" class="inline-block bg-gradient-to-r from-primary-100 to-secondary-200 text-primary-700 px-6 py-3 rounded-full font-medium shadow hover:shadow-lg transform hover:-translate-y-1 transition-all duration-200 border border-white/20">Explore Posts</a>
-                <a href="{{ "about/" | relURL }}" class="inline-block bg-white bg-opacity-20 text-white px-6 py-3 rounded-full font-medium border border-white/40 hover:bg-opacity-30 hover:shadow-lg transform hover:-translate-y-1 transition-all duration-200">Learn More</a>
+                <a href="{{ "blog/" | relURL }}" class="btn-primary inline-block bg-gradient-to-r from-primary-100 to-secondary-200 text-primary-700 px-6 py-3 rounded-full font-medium shadow hover:shadow-lg transform hover:-translate-y-1 transition-all duration-200 border border-white/20">Explore Posts</a>
+                <a href="{{ "about/" | relURL }}" class="btn-secondary inline-block bg-white bg-opacity-20 text-white px-6 py-3 rounded-full font-medium border border-white/40 hover:bg-opacity-30 hover:shadow-lg transform hover:-translate-y-1 transition-all duration-200">Learn More</a>
             </div>
         </div>
     </div>
@@ -28,46 +28,63 @@
             {{ $recentPosts := first 5 $posts }}
             
             {{ if $recentPosts }}
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-8 md:mb-12">
-                {{ range $recentPosts }}
-                <article class="bg-white rounded-lg shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300 overflow-hidden">
+            <div class="blog-card-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-8 md:mb-12">
+                {{ range $index, $post := $recentPosts }}
+                <article class="blog-card bg-white rounded-lg shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300 overflow-hidden" 
+                         role="article" 
+                         aria-labelledby="post-title-{{ $post.File.UniqueID }}">
                     <!-- Featured Image Placeholder -->
-                    <div class="h-48 md:h-56 bg-gradient-to-br from-primary-100 to-secondary-100 flex items-center justify-center">
-                        <div class="text-primary-600 text-4xl">📝</div>
+                    <div class="featured-image-placeholder">
+                        <div class="text-primary-600 text-4xl" aria-hidden="true">📝</div>
                     </div>
                     
                     <!-- Post Content -->
                     <div class="p-6">
-                        <!-- Enhanced Metadata -->
-                        <div class="flex items-center text-sm text-gray-500 mb-3">
-                            <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
-                            <span class="mx-2">•</span>
-                            <span>{{ .ReadingTime }} min read</span>
+                        <!-- Enhanced Metadata with Accessibility -->
+                        <div class="post-metadata mb-3" aria-label="Post metadata">
+                            <time datetime="{{ $post.Date.Format "2006-01-02T15:04:05Z07:00" }}" aria-label="Published date">
+                                {{ $post.Date.Format "Jan 2, 2006" }}
+                            </time>
+                            <span class="mx-2" aria-hidden="true">•</span>
+                            <span class="reading-time" aria-label="Reading time">{{ $post.ReadingTime }} min read</span>
                         </div>
                         
-                        <h3 class="heading-4 mb-3">
-                            <a href="{{ .RelPermalink }}" class="hover:text-primary-600 transition-colors duration-200">{{ .Title }}</a>
-                        </h3>
+                        <header class="card-header">
+                            <h3 id="post-title-{{ $post.File.UniqueID }}" class="heading-4 mb-3">
+                                <a href="{{ $post.RelPermalink }}" 
+                                   class="hover:text-primary-600 transition-colors duration-200"
+                                   aria-describedby="post-summary-{{ $post.File.UniqueID }}">
+                                    {{ $post.Title }}
+                                </a>
+                            </h3>
+                        </header>
                         
-                        {{ if .Summary }}
-                        <p class="body-regular mb-4">{{ .Summary }}</p>
+                        <!-- Screen reader summary -->
+                        <div id="post-summary-{{ $post.File.UniqueID }}" class="sr-only">
+                            {{ $post.Summary }} - {{ $post.ReadingTime }} minute read
+                        </div>
+                        
+                        {{ if $post.Summary }}
+                        <p class="body-regular mb-4">{{ $post.Summary }}</p>
                         {{ end }}
                         
-                        <!-- Tags Display -->
-                        {{ if .Params.tags }}
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            {{ range .Params.tags }}
-                            <span class="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-full">
+                        <!-- Enhanced Tags Display -->
+                        {{ if $post.Params.tags }}
+                        <div class="flex flex-wrap gap-2 mb-4" role="group" aria-label="Post tags">
+                            {{ range $post.Params.tags }}
+                            <span class="tag" role="button" tabindex="0">
                                 {{ . }}
                             </span>
                             {{ end }}
                         </div>
                         {{ end }}
                         
-                        <!-- Enhanced Read More -->
-                        <a href="{{ .RelPermalink }}" class="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium">
+                        <!-- Enhanced Read More with Accessibility -->
+                        <a href="{{ $post.RelPermalink }}" 
+                           class="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium transition-colors duration-200"
+                           aria-label="Read full post: {{ $post.Title }}">
                             Read More
-                            <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                             </svg>
                         </a>
@@ -76,7 +93,7 @@
                 {{ end }}
             </div>
             <div class="text-center">
-                <a href="{{ "blog/" | relURL }}" class="inline-block bg-gradient-to-r from-primary-600 to-secondary-600 text-white px-6 py-3 rounded-full font-medium hover:shadow-lg transform hover:-translate-y-1 transition-all duration-200">
+                <a href="{{ "blog/" | relURL }}" class="btn-primary inline-block bg-gradient-to-r from-primary-600 to-secondary-600 text-white px-6 py-3 rounded-full font-medium hover:shadow-lg transform hover:-translate-y-1 transition-all duration-200">
                     View All Posts
                 </a>
             </div>
