@@ -30,7 +30,7 @@
             {{ if $recentPosts }}
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-8 md:mb-12">
                 {{ range $recentPosts }}
-                <article class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden">
+                <article class="bg-white rounded-lg shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300 overflow-hidden">
                     <!-- Featured Image Placeholder -->
                     <div class="h-48 md:h-56 bg-gradient-to-br from-primary-100 to-secondary-100 flex items-center justify-center">
                         <div class="text-primary-600 text-4xl">📝</div>
@@ -53,8 +53,23 @@
                         <p class="body-regular mb-4">{{ .Summary }}</p>
                         {{ end }}
                         
-                        <a href="{{ .RelPermalink }}" class="text-accent hover:text-primary-700 font-medium transition-colors duration-200">
-                            Read more →
+                        <!-- Tags Display -->
+                        {{ if .Params.tags }}
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            {{ range .Params.tags }}
+                            <span class="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-full">
+                                {{ . }}
+                            </span>
+                            {{ end }}
+                        </div>
+                        {{ end }}
+                        
+                        <!-- Enhanced Read More -->
+                        <a href="{{ .RelPermalink }}" class="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium">
+                            Read More
+                            <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
                         </a>
                     </div>
                 </article>
