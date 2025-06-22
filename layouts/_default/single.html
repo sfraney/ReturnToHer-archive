@@ -20,7 +20,7 @@
                 <div class="flex flex-wrap items-center gap-2">
                     <span class="body-small font-medium text-emphasis">Tags:</span>
                     {{ range .Params.tags }}
-                    <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" 
+                    <a href="{{ "/tags/" | relURL }}{{ . | urlize }}" 
                        class="inline-block bg-gray-100 hover:bg-primary-100 text-gray-700 hover:text-primary-700 px-3 py-1 rounded-full body-xs font-medium transition-colors duration-200">
                         {{ . }}
                     </a>
