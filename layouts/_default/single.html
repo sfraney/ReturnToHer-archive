@@ -10,7 +10,7 @@
                 </time>
                 {{ end }}
                 {{ if .Params.image }}
-                <img src="{{ .Params.image }}" alt="{{ .Title }}" class="mt-4 rounded-lg">
+                <img src="{{ .Params.image | relURL }}" alt="{{ .Title }}" class="mt-4 rounded-lg">
                 {{ end }}
             </header>
             

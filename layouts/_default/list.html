@@ -23,7 +23,7 @@
                      aria-labelledby="post-title-{{ $post.File.UniqueID }}">
                 <!-- Featured Image Placeholder -->
                 {{ if $post.Params.image }}
-                <img src="{{ $post.Params.image }}" alt="Featured image for {{ $post.Title }}">
+                <img src="{{ $post.Params.image | relURL }}" alt="Featured image for {{ $post.Title }}">
                 {{ else }}
                 <div class="featured-image-placeholder">
                     <div class="text-primary-600 text-4xl" aria-hidden="true">📝</div>
