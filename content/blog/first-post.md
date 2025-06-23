@@ -3,7 +3,7 @@ title: "The Beginning of the Journey"
 date: 2025-06-21
 tags: ["journey", "beginnings", "reflection"]
 summary: "Every journey begins with a single step. This is mine."
-image: /images/first-post.png
+image: images/first-post.png
 
 ---
 
